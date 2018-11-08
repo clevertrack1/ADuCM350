@@ -6,6 +6,7 @@ This software is proprietary to Analog Devices, Inc. and its licensors.  By usin
 this software you agree to the terms of the associated Analog Devices Software
 License Agreement (See /LICENSES/ADI.LABLAB.LICENSE). 
 
+Modified from the Analog Devices original.
 Portions Copyright (c) 2018 Andrew Grosser, Moritz von Buttlar.
 
 *********************************************************************************/
@@ -71,8 +72,10 @@ void test_Init()
 void test_Pass()
 {
     char pass[] = "PASS!\n\r";
-
+//AG
+#if (0 == USE_UART_FOR_DATA)
     printf(pass);
+#endif
 
     /* Once the result is reported, do an abrupt termination */
     quit();
@@ -91,10 +94,12 @@ void test_Fail(char *FailureReason)
 {
     char fail[] = "FAIL: ";
     char term[] = "\n\r";
-
+//AG
+#if (0 == USE_UART_FOR_DATA)
     printf(fail);
     printf(FailureReason);
     printf(term);
+#endif
 
     /* Once the result is reported, do an abrupt termination */
     quit();
@@ -113,10 +118,11 @@ void test_Perf(char *InfoString)
 {
     char info[] = "PERF: ";
     char term[] = "\n\r";
-
+#if (0 == USE_UART_FOR_DATA)
     printf(info);
     printf(InfoString);
     printf(term);
+#endif
 
     /* do not quit... */
 }

@@ -6,6 +6,7 @@ This software is proprietary to Analog Devices, Inc. and its licensors.  By usin
 this software you agree to the terms of the associated Analog Devices Software
 License Agreement (See /LICENSES/ADI.LABLAB.LICENSE). 
 
+Modified from the Analog Devices original.
 Portions Copyright (c) 2018 Andrew Grosser, Moritz von Buttlar.
 
 *********************************************************************************/
@@ -24,12 +25,12 @@ Portions Copyright (c) 2018 Andrew Grosser, Moritz von Buttlar.
 /* Helper macro for printing strings to UART or Std. Output */
 #define PRINT(s)                    test_print(s)
 
-
-extern void initialise_monitor_handles(void);
-
+#if defined (DEBUG) && defined (__GNUC__) && !defined (NDEBUG)
+	extern void initialise_monitor_handles(void);
+#endif
 
 int main(void) {
-#ifdef DEBUG
+#if defined (DEBUG) && defined (__GNUC__) && !defined (NDEBUG)
 	initialise_monitor_handles();
 #endif
 
@@ -61,12 +62,12 @@ int main(void) {
     SetSystemClockDivider(ADI_SYS_CLOCK_UART, 2);
 
     
-    PRINT("BEGINNING TEST ....\n\n");
-    //BlinkyTest();
+
+    BlinkyTest();
     //FlashTest();
     //AfeTest();
-    UartEcho();
-    PASS();
+    //UartEcho();
+
 }
 
 
